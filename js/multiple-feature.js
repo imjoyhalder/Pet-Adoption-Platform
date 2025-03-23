@@ -2,12 +2,58 @@
 const loadPetData = async () => {
     const res = await fetch('https://openapi.programming-hero.com/api/peddy/pets')
     const data = await res.json()
-    console.log(data.pets);
+    //console.log(data.pets);
     displayPateCard(data.pets)
 }
+ 
+const loadPetCategory = async () => {
+    const res = await fetch('https://openapi.programming-hero.com/api/peddy/categories')
+    const data = await res.json()
+    //console.log(data.categories);
+    displayPetCategoryBtn(data.categories)
+}
 
-const displayPateCard = (pateDetailsArray) => {
+const loadAllCategory = async (categoryName) => {
+    try {
+        //console.log(categoryName);
+        const res = await fetch(`https://openapi.programming-hero.com/api/peddy/category/${categoryName}`);
+        const info = await res.json(); // Wait for JSON conversion
+        //console.log(info.data); // Access `data` safely
+        displayPateCard(info.data)
+    } catch (error) {
+        console.error("Error fetching category data:", error);
+    }
+};
+
+const displayPetCategoryBtn = (petCategoryArray) => {
+    const categoryContainer = document.getElementById('petCategoryContainer')
+    petCategoryArray.forEach((item) => {
+        // Ensure category is safe for id
+        const safeCategory = item.category.replace(/\s+/g, '-');
+
+        const categoryBtn = document.createElement('div')
+        categoryBtn.innerHTML = `
+            <button id="${safeCategory}" class="btn btn-active w-36 h-14 rounded-2xl category-btn">
+                <img class="w-9" src="${item.category_icon}" alt="">
+                <p class="font-bold text-xl">${item.category}</p>
+            </button>
+        `
+        categoryContainer.appendChild(categoryBtn)
+
+        // Attach event listener after adding to DOM
+        document.getElementById(safeCategory).onclick = () => loadAllCategory(item.category)
+    })
+}
+
+const displayPateCard = (pateDetailsArray='') => {
     const cardContainer = document.getElementById('petsCardContainer')
+    
+    if(pateDetailsArray.length == 0){
+        const errorCard = document.createElement('div')
+        cardContainer.innerHTML = `
+            <img src = 'images/error.webp'/>
+        `
+    }
     pateDetailsArray.forEach((item) => {
         const petCard = document.createElement('div')
         petCard.innerHTML = `
@@ -45,28 +91,6 @@ const displayPateCard = (pateDetailsArray) => {
     })
 }
 
-const loadPetCategory = async () => {
-    const res = await fetch('https://openapi.programming-hero.com/api/peddy/categories')
-    const data = await res.json()
-    console.log(data.categories);
-    displayPetCategory(data.categories)
-}
-
-const displayPetCategory = (petCategoryArray) => {
-    const categoryContainer = document.getElementById('petCategoryContainer')
-
-    petCategoryArray.forEach((item) => {
-        const categoryBtn = document.createElement('div')
-        categoryBtn.innerHTML = `
-            <button class="btn btn-active w-36 h-14 rounded-2xl">
-                <img class=" w-9 " src= ${item.category_icon} alt="">
-                <p class="font-bold text-xl">${item.category}</p>
-            </button>
-        `
-        categoryContainer.appendChild(categoryBtn)
-    })
-
-}
 
 loadPetCategory()
 loadPetData()
