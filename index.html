@@ -11,9 +11,12 @@
     <!-- install daisyUI form CDN -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.24/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
+
+
 </head>
 
 <body>
+    
     <header class=" ">
         <nav class=" w-11/12 mx-auto py-3 flex justify-between items-center ">
             <div class=" flex gap-1 items-center">
@@ -25,7 +28,9 @@
                 <a href="">Shop</a>
                 <a href="">Contact</a>
             </div>
-            <div>
+            <div class=" flex  ">
+                <button onclick="document.documentElement.setAttribute('data-theme', 'dark')"><img class="w-7" src="https://img.icons8.com/?size=25&id=HpcvnWPxS15j&format=png" alt=""></button>
+                <button onclick="document.documentElement.setAttribute('data-theme', 'light')"><img class="w-7" src="https://img.icons8.com/?size=50&id=20183&format=png" alt=""></button>
                 <div class="dropdown dropdown-end">
                     <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
                         <div class="w-10 rounded-full">
@@ -61,6 +66,9 @@
             </div>
         </section>
     </header>
+
+    
+
     <main class="w-11/12 mx-auto">
         <!-- Adopt your best Friend -->
         <section class=" text-center py-6 space-y-5">
@@ -79,46 +87,21 @@
         <div>
             <div class="py-8 flex items-center justify-between">
                 <h1 class="font-bold text-xl">Best Deal For You</h1>
-                <button class="btn btn-primary">
+                <button id="sortBtn" class="btn btn-primary">
                     <p class="font-bold text-[15px]">Sort by Price</p>
                 </button>
             </div>
-            <div id="petsCardContainer" class="py-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 justify-items-center  items-center gap-3">
-                <!-- <div class="card px-3 pt-3 pb-3 w-72 bg-orange-50 ">
-                    <figure class="">
-                        <img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                            alt="Shoes" class="rounded-xl object-cover" />
-                    </figure>
-                    <div class="space-y-1 pb-3">
-                        <h1 class="font-bold text-xl">Mister Tartosh</h1>
-                        <div class="flex items-center gap-1">
-                            <img class="size-4" src="https://img.icons8.com/?size=24&id=82774&format=png" alt="">
-                            <h1>Breed:  Golder retriever</h1>
-                        </div>
-                        <div class="flex items-center gap-1">
-                            <img class="size-5" src="https://img.icons8.com/?size=48&id=WGDB4PoaXTo5&format=png" alt="">
-                            <h1>Birth: 2024</h1>
-                        </div>
-                        <div class="flex items-center gap-1">
-                            <img class="size-4" src="https://img.icons8.com/?size=25&id=2LHzVg3k4AqG&format=png" alt="">
-                            <h1>Gender: Female</h1>
-                        </div>
-                        <div class="flex items-center gap-1">
-                            <img class="size-4" src="https://img.icons8.com/?size=24&id=85801&format=png" alt="">
-                            <h1>Price: 199$</h1>
-                        </div>
-                    </div>
-                    <hr class="border-gray-300 ">
-                    <div class=" flex justify-between items-center pt-3 border-collapse ">
-                        <button class="btn w-16 btn-active border-s-lime-500"><img class=" " src="https://img.icons8.com/?size=24&id=83997&format=png" alt=""></button>
-                        <button class="btn w-16 btn-active border-s-lime-500">Adopt</button>
-                        <button class="btn w-16 btn-active border-s-lime-500">Details</button>
-                    </div>
-                </div> -->
+
+            <!-- <div class="flex justify-between justify-items-center" >
+                
+                
+            </div> -->
+            <div id="petsCardContainer"
+                class="py-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 justify-items-center  items-center gap-3">
+
             </div>
         </div>
     </main>
-
 
     <section class="bg-black p-12">
         <footer class="footer sm:footer-horizontal w-11/12 mx-auto justify-between  text-neutral-content ">
@@ -164,7 +147,22 @@
 
     </section>
 
-    
+    <!-- Open the modal using ID.showModal() method -->
+    <button class="btn hidden " onclick="myModal.showModal()">open modal</button>
+    <dialog id="myModal" class="modal  ">
+        <div class="modal-box ">
+            <div class="mx-auto" id="modalContent">
+                
+            </div>
+            <div class="modal-action grid grid-cols-1">
+                <form method="dialog">
+                    <!-- if there is a button in form, it will close the modal -->
+                    <button class="btn w-full font-bold btn-primary">   Close    </button>
+                </form>
+            </div>
+        </div>
+    </dialog>
+
     <script src="js/multiple-feature.js"></script>
 </body>
 
